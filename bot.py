@@ -12,14 +12,21 @@ from pathlib import Path
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
+# os.environ (Railway, variables système) est lu en priorité.
+# load_dotenv() ne remplace jamais une variable déjà présente dans l'environnement —
+# elle sert uniquement en développement local quand le fichier .env existe.
+load_dotenv(override=False)
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
-CHAT_ID = os.getenv("CHAT_ID", "")
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
+CHAT_ID = os.environ.get("CHAT_ID", "")
 
 if not TELEGRAM_TOKEN or not CHAT_ID:
-    sys.exit("Erreur : TELEGRAM_TOKEN et CHAT_ID doivent être définis dans le fichier .env")
+    sys.exit(
+        "Erreur : TELEGRAM_TOKEN et CHAT_ID sont introuvables.\n"
+        "  - En local : définissez-les dans le fichier .env\n"
+        "  - Sur Railway : ajoutez-les dans Settings > Variables"
+    )
 CHECK_INTERVAL = 180  # 3 minutes
 
 SEEN_IDS_FILE = Path("seen_ids.json")
