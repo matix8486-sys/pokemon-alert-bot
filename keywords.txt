@@ -1,0 +1,7 @@
+# Un mot-clé par ligne. Les lignes commençant par # sont ignorées.
+# Sois précis pour éviter trop de faux positifs.
+
+Méga Dracaufeu 125
+Pikachu ex 276
+Mewtwo ex 281
+Méga Ectoplasma Ex 284

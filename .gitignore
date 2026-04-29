@@ -1,0 +1,5 @@
+.env
+venv/
+seen_ids.json
+*.pyc
+__pycache__/
